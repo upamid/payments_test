@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Платежная система{% endblock %}
+{% block header %}Платежная система{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form id="billForm" action="{% url 'bill' %}" method="post">
+            {% csrf_token %}
+            {{ formChoice }}
+            <input type="submit" value="Выбрать" />
+        </form>
+    </div>
+{% endblock %}
+
+
+

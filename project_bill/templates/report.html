@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Платежная система{% endblock %}
+{% block header %}Закрытие периода{% endblock %}
+
+{% block content %}
+<div class="container">
+    
+    <p><b>Имя пользователя:</b> {{ bill.account_id.name }}</p>
+    <p><b>Период:</b> {{ bill.period_id.month }}</p>
+    <table>
+        <tr>
+            <th>
+                Наименование услуги
+            </th>
+            <th>
+                Стоимость
+            </th>
+        </tr>
+        {% for item in data %}
+        <tr>
+            <td>
+                {{ item.service_id.name }}
+            </td>
+            <td>
+                {{ item.value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>        
+
+</div>
+{% endblock %}

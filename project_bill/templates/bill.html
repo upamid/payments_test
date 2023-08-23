@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}Платежная система{% endblock %}
+{% block header %}Квитанция клиента{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p><b>Имя пользователя:</b> {{ data.account_id.name }}</p>
+    <p><b>Период:</b> {{ data.period_id.month }}</p>
+    <table>
+        <tr>
+            <th>
+                Наименование услуги
+            </th>
+            <th>
+                Стоимость
+            </th>
+        </tr>
+        {% for item in data.bill_dets %}
+        <tr>
+            <td>
+                {{ item.service_id.name }}
+            </td>
+            <td>
+                {{ item.value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>        
+
+    <p>Изменения в платеже:</p>
+    <table id="bill_adj">
+        <tr>
+            <th>
+                id
+            </th>
+            <th>
+                Наименование услуги
+            </th>
+            <th>
+                Стоимость
+            </th>
+        </tr>
+        {% for item in data.bill_adj %}
+        <tr id="{{ item.id }}">
+            <td>
+                {{ item.id }}
+            </td>
+            <td>
+                {{ item.service_name }}
+            </td>
+            <td>
+                {{ item.value }}
+            </td>
+            <td>
+                <button class="btn btn-danger remove" 
+                    type="button">Удалить</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p>Платежи:</p>
+    <table id="payment">
+        <tr>
+            <th>
+                id
+            </th>
+            <th>
+                Месяц
+            </th>
+            <th>
+                Сумма
+            </th>
+        </tr>
+        {% for item in payments %}
+        <tr id="{{ item.id }}">
+            <td>
+                {{ item.id }}
+            </td>
+            <td>
+                {{ item.period_id.month }}
+            </td>
+            <td>
+                {{ item.value }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form id="bill_adjForm">
+        {% csrf_token %}
+
+        <input type="hidden" name="account_id" value="{{ data.account_id.id }}"/>
+        <input type="hidden" name="bill_id" value="{{ data.id }}"/>
+
+        <select name="service_id" id="service-select">
+            {% for service in services %}
+                <option value="{{ service.id }}">{{ service.name }}</option>
+            {% endfor %}
+        </select>
+            <input type="number" required name="value" value="0" step=".01">
+        <input type="submit" value="Submit" />
+    </form>
+
+    <form id="balance" action="{% url 'balance' %}" method="POST">
+        {% csrf_token %}
+
+        <input type="hidden" name="account_id" value="{{ data.account_id.id }}"/>
+        <input type="hidden" name="bill_id" value="{{ data.id }}"/>
+        <input type="hidden" name="period_id" value="{{ data.period_id.id }}"/>
+
+        <input type="submit" value="Закрыть период" />
+    </form>
+
+    {% block javascript %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            const csrf_token = "{{ csrf_token }}";
+            
+            $('#bill_adjForm').submit(function(e) {
+                e.preventDefault();
+                var data = $(this).serializeArray();
+                console.log(data)
+
+                $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "{% url 'ajax_bill_adj' %}",
+                    success: function (data) {  
+                        $('#bill_adj').append(`<tr id="${data.id}">
+                            <td>${data.id}</td>
+                            <td>${data.service_name}</td>
+                            <td>${data.value}</td>
+                            <td><button class="btn btn-danger remove"type="button">Удалить</button>
+                            </td></tr>`);
+                        }
+                });
+            });
+
+            $('#bill_adj').on('click', '.remove', function () {
+                var child = $(this).closest('tr');
+                var id = child.attr('id');
+                console.log(id)
+                $.ajax({
+                    data: {csrfmiddlewaretoken: csrf_token,
+                            id: id,
+                            },
+                    headers: {'X-CSRFToken': csrf_token},
+                    type: "POST",
+                    url: "{% url 'ajax_bill_adj_delete' %}",
+                    success: function (data) {  
+                        child.remove();
+                        }
+                });
+            });
+        </script>
+    {% endblock javascript %}
+</div>
+{% endblock %}

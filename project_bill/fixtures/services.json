@@ -1,0 +1,177 @@
+[
+    {
+        "model": "bill.service",
+        "pk": 0,
+        "fields": {
+            "name": "Управление многоквартирным домом"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 1,
+        "fields": {
+            "name": "Уборка территории"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 2,
+        "fields": {
+            "name": "Вывоз мусора"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 3,
+        "fields": {
+            "name": "Водоснабжение и канализация"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 4,
+        "fields": {
+            "name": "Отопление и горячее водоснабжение"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 5,
+        "fields": {
+            "name": "Электроснабжение"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 6,
+        "fields": {
+            "name": "Газоснабжение"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 7,
+        "fields": {
+            "name": "Техническое обслуживание"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 8,
+        "fields": {
+            "name": "Ремонт и замена оборудования"
+        }
+    },
+    {
+        "model": "bill.service",
+        "pk": 9,
+        "fields": {
+            "name": "Обслуживание лифтов"
+        }
+    },
+    {
+        "model": "bill.account",
+        "pk": 0,
+        "fields": {
+            "name": "Иван Иванов"
+        }
+    },
+    {
+        "model": "bill.account",
+        "pk": 1,
+        "fields": {
+            "name": "Алексей Михайлов"
+        }
+    },
+    {
+        "model": "bill.account",
+        "pk": 2,
+        "fields": {
+            "name": "Евгений Сергеев"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 0,
+        "fields": {
+            "month": "Январь"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 1,
+        "fields": {
+            "month": "Февраль"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 2,
+        "fields": {
+            "month": "Март"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 3,
+        "fields": {
+            "month": "Апрель"
+        }
+    },          
+    {
+        "model": "bill.period",
+        "pk": 4,
+        "fields": {
+            "month": "Май"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 5,
+        "fields": {
+            "month": "Июнь"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 6,
+        "fields": {
+            "month": "Июль"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 7,
+        "fields": {
+            "month": "Август"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 8,
+        "fields": {
+            "month": "Сентябрь"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 9,
+        "fields": {
+            "month": "Октябрь"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 10,
+        "fields": {
+            "month": "Ноябрь"
+        }
+    },
+    {
+        "model": "bill.period",
+        "pk": 11,
+        "fields": {
+            "month": "Декабрь"
+        }
+    }
+]
