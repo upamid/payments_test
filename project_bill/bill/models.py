@@ -24,8 +24,8 @@ class Service(models.Model):
     class Meta:
         verbose_name = 'Сервис',
         verbose_name_plural = 'Сервисы'
-        ordering = ['id'] 
-    
+        ordering = ['id']
+
     def __str__(self):
         return self.name
 
@@ -133,6 +133,7 @@ class Payment(models.Model):
         decimal_places=2
     )
 
+
 class Balance(models.Model):
     account_id = models.ForeignKey(
         Account,
@@ -158,4 +159,4 @@ class Balance(models.Model):
         blank=False,
         max_digits=12,
         decimal_places=2
-    )    
+    )
